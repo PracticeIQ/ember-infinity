@@ -39,14 +39,16 @@ const InfinityLoaderComponent = Ember.Component.extend({
   },
 
   _checkIfInView() {
-    var selfOffset       = this.$().offset().top;
-    var scrollable       = this.get("_scrollable");
-    var scrollableBottom = scrollable.height() + scrollable.scrollTop();
+    if (this && this.$()) {
+      var selfOffset       = this.$().offset().top;
+      var scrollable       = this.get("_scrollable");
+      var scrollableBottom = scrollable.height() + scrollable.scrollTop();
 
-    var inView = selfOffset < scrollableBottom;
+      var inView = selfOffset < scrollableBottom;
 
-    if (inView && !this.get('developmentMode')) {
-      this.sendAction('loadMoreAction');
+      if (inView && !this.get('developmentMode')) {
+        this.sendAction('loadMoreAction');
+      }
     }
   },
 
